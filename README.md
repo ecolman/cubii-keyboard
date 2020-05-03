@@ -7,4 +7,4 @@ Connects with a [Cubii fitness device](https://www.cubii.com/) via bluetooth to 
 * [secure-electron-template](https://github.com/reZach/secure-electron-template) - base template for the electron/react application
 * [Electron](https://www.electronjs.org/) - framework for desktop application
 * [React](https://reactjs.org/) - UI framework
-* [Material-UI][https://material-ui.com/] - UI components
+* [Material-UI](https://material-ui.com/) - UI components
