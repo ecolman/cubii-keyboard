@@ -1,0 +1,13 @@
+html {
+  background-color: white;
+  font-family: 'Roboto';
+}
+
+body {
+  margin: 0;
+  height: -webkit-fill-available;
+}
+
+#root {
+  height: -webkit-fill-available;
+}

@@ -1,0 +1,105 @@
+{
+  "name": "cubii-keyboard",
+  "version": "0.2.0",
+  "description": "Cubii Keyboard",
+  "private": true,
+  "main": "app/electron/main.js",
+  "scripts": {
+    "postinstall": "electron-builder install-app-deps",
+    "dev-server": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack.development.js",
+    "start": "concurrently \"npm run dev-server\" \"cross-env NODE_ENV=development electron .\" -k",
+    "prod-build": "cross-env NODE_ENV=production npx webpack --mode=production --config ./webpack.production.js",
+    "prod": "npm run prod-build && electron .",
+    "pack": "electron-builder --dir",
+    "dist": "npm run prod-build && electron-builder",
+    "dist-mac": "npm run prod-build && electron-builder --mac",
+    "dist-linux": "npm run prod-build && electron-builder --linux",
+    "dist-windows": "npm run prod-build && electron-builder --windows",
+    "dist-all": "npm run prod-build && electron-builder --mac --linux --windows"
+  },
+  "build": {
+    "productName": "Cubii Keyboard",
+    "appId": "com.triphopclan.cubiiKeyboard",
+    "directories": {
+      "buildResources": "resources"
+    },
+    "win": {
+      "target": [
+        "portable"
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "rpm",
+        "snap",
+        "AppImage"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ecolman/cubii-keyboard.git"
+  },
+  "keywords": [
+    "cubii",
+    "electron",
+    "bluetooth",
+    "react",
+    "redux",
+    "webpack"
+  ],
+  "author": "ecolman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ecolman/cubii-keyboard/issues"
+  },
+  "homepage": "https://github.com/ecolman/cubii-keyboard#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.9.12",
+    "@material-ui/icons": "^4.9.1",
+    "@reduxjs/toolkit": "^1.3.4",
+    "connected-react-router": "^6.8.0",
+    "glob": "^7.1.6",
+    "lodash.merge": "^4.6.2",
+    "noble": "^1.9.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.5",
+    "robotjs": "^0.6.0",
+    "secure-electron-store": "1.1.0",
+    "typeface-roboto": "0.0.75",
+    "typeface-roboto-mono": "0.0.75",
+    "uuid": "^8.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-react-jsx": "^7.9.4",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "concurrently": "^5.1.0",
+    "cross-env": "^7.0.2",
+    "csp-html-webpack-plugin": "^4.0.0",
+    "css-loader": "^3.5.2",
+    "electron": "^8.2.2",
+    "electron-builder": "^22.4.1",
+    "electron-debug": "^3.0.1",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-rebuild": "^1.10.1",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.2.0",
+    "less-loader": "^6.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "style-loader": "^1.1.3",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2"
+  }
+}
