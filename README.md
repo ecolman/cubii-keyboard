@@ -8,3 +8,11 @@ Connects with a [Cubii fitness device](https://www.cubii.com/) via bluetooth to 
 * [Electron](https://www.electronjs.org/) - framework for desktop application
 * [React](https://reactjs.org/) - UI framework
 * [Material-UI](https://material-ui.com/) - UI components
+
+### How to use
+```
+git clone https://github.com/ecolman/cubii-keyboard.git
+cd cubii-keyboard
+npm i
+npm run start
+```
