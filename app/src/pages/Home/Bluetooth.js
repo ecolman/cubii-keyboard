@@ -100,7 +100,7 @@ function Bluetooth() {
       // console.log(`DATA | ${value} | ${char.label}`);
 
       if (char) {
-        char.value.current = value;0
+        char.value.current = value;
       }
     });
 
@@ -112,7 +112,20 @@ function Bluetooth() {
     //   console.log(`NOTIFY | ${value} | ${CUBII_MAP.current[index].label}`);
     // });
 
-    return window.api.cubiiBluetooth.clearRendererBindings;
+    return () => {
+      window.api.cubiiBluetooth.clearRendererBindings();
+
+      // release key
+      window.api.cubiiBluetooth.send(window.api.cubiiBluetooth.channels.pressKeyRequest, {
+        key: keyToPress, 
+        direction: 'up'
+      });
+
+      dispatch(settingsActions.SET_SETTINGS_OPTION({
+        id: 'keyIsPressed',
+        value: false
+      }));
+    }
   }, []);
   
   useEffect(() => {

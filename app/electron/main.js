@@ -46,7 +46,7 @@ async function createWindow() {
 
   // Create the browser window.
   win = new BrowserWindow({
-    width: isDev ? 1024 : 600,
+    width: isDev ? 1024 : 625,
     height: 600,
     title: `Cubii-Keyboard Interface (v.${app.getVersion()})`,
     webPreferences: {
