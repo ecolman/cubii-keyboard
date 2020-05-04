@@ -10,6 +10,7 @@ Connects with a [Cubii fitness device](https://www.cubii.com/) via bluetooth to 
 * [Material-UI](https://material-ui.com/) - UI components
 
 ### How to use
+First, make sure to disconnect your phone's bluetooth from the Cubii.
 ```
 git clone https://github.com/ecolman/cubii-keyboard.git
 cd cubii-keyboard
