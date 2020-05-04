@@ -9,8 +9,8 @@ export const INITIAL_STATE = {
   keyIsPressed: false,
   keyToPress: window.api.store.initial()?.['settings[keyToPress]'] || 'w',
   threshold: window.api.store.initial()?.['settings[threshold]'] || {
-    speed: 1,
-    cpm: 30,
+    speed: 2,
+    cpm: 40,
     selected: 'speed'
   }
 };

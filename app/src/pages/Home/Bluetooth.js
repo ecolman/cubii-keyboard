@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useReducer } from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { Card, CardHeader, CardContent, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,7 +8,7 @@ import { actions as settingsActions, selectors as settingsSelectors } from 'Redu
 
 const useStyles = makeStyles(theme => ({
   container: {
-    height: 400
+    height: 450
   },
   stepText: {
     paddingBottom: theme.spacing(5)
@@ -17,6 +17,9 @@ const useStyles = makeStyles(theme => ({
     fontSize: 16,
     fontWeight: 'bold',
     paddingBottom: 30
+  },
+  action: {
+    height: 32
   },
   metric: {
     paddingBottom: theme.spacing(4)
@@ -66,7 +69,6 @@ function Bluetooth() {
 
     // scan for peripheral
     window.api.cubiiBluetooth.onReceive(channelEnums.foundPeripheralResponse, data => {
-      setStep('Found Peripheral!');
       peripheral = data;
 
       setStep('Discovering Services & Characteristics...');
@@ -75,7 +77,7 @@ function Bluetooth() {
 
     // discover services and characteristics
     window.api.cubiiBluetooth.onReceive(channelEnums.foundServicesCharacteristicsResponse, data => {
-      setStep('Discovered services and characteristics, hooking into data...');
+      setStep('Found services and characteristics...');
       
       services = data.services;
       characteristics = data.characteristics;
@@ -158,24 +160,68 @@ function Bluetooth() {
   }, []);
 
   return (
-    <Grid className={classes.container}>
-      <Grid item xs={12} className={classes.stepText}>
-        <Typography align="center"><b>{step}</b></Typography>
+    <>
+      <Grid container spacing={1} className={classes.container}>
+        <Grid item xs={12} className={classes.stepText}>
+          <Typography align="center"><b>{step}</b></Typography>
+        </Grid>
+        
+        <Grid item xs={12} className={classes.action}>
+          <Typography variant="h6" align="center">
+            {keyIsPressed && (`${keyToPress} is being pressed`)}
+          </Typography>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Card>
+            <CardHeader
+              title={CUBII_MAP.current[0].label}
+              titleTypographyProps={{
+                align: 'center',
+                variant: 'h6'
+              }}
+            />
+            <CardContent>
+              <Typography variant="h4" align="center">{CUBII_MAP.current[0].value.current}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Card>
+            <CardHeader
+              title={CUBII_MAP.current[3].label}
+              titleTypographyProps={{
+                align: 'center',
+                variant: 'h6'
+              }}
+            />
+            <CardContent>
+              <Typography variant="h4" align="center">{CUBII_MAP.current[3].value.current}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={3}>&nbsp;</Grid>
+
+        <Grid item xs={6}>
+          <Card>
+            <CardHeader
+              title={CUBII_MAP.current[1].label}
+              titleTypographyProps={{
+                align: 'center',
+                variant: 'h6'
+              }}
+            />
+            <CardContent>
+              <Typography variant="h4" align="center">{CUBII_MAP.current[1].value.current}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={3}>&nbsp;</Grid>
       </Grid>
-
-        {CUBII_MAP.current.map(char => !char?.skip && (
-          <Grid item xs={12} className={classes.metric} key={char.label}>
-            <Typography variant="h4" align="center">{char.value.current}</Typography>
-            <Typography variant="h6" align="center">{char.label}</Typography>
-          </Grid>
-        ))}
-
-        {keyIsPressed && (
-          <Grid item xs={12}>
-            <Typography variant="h6" align="center">{keyToPress} is being pressed</Typography>
-          </Grid>
-        )}
-    </Grid>
+    </>
   );
 }
 

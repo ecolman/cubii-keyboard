@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     cursor: 'pointer',
   },
   keySetText: {
-    paddingBottom: theme.spacing(1.5)
+    padding: theme.spacing(0.75, 0)
   }
 })); 
 
@@ -74,7 +74,7 @@ function Settings() {
             title="Threshold"
             subheader={
               cpmSelected && (<span>{cpm} Cycle{cpm > 1 ? 's' : ''} per Minute</span>) ||
-              speedSelected && (<span>{speed} Speed</span>)
+              speedSelected && (<span>Speed of {speed}</span>)
             }
             subheaderTypographyProps={{
               variant: 'h6'

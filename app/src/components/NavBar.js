@@ -7,8 +7,8 @@ import {
   ListItemIcon,
   ListItemText
 } from '@material-ui/core';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import BluetoothConnectedIcon from '@material-ui/icons/BluetoothConnected';
+import TuneIcon from '@material-ui/icons/Tune';
 import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -18,12 +18,12 @@ const drawerWidth = 150;
 
 const ROUTES_MAP = [
   {
-    Icon: InboxIcon,
+    Icon: BluetoothConnectedIcon,
     label: 'Cubii',
     route: ROUTES.BLUETOOTH
   },
   {
-    Icon: MailIcon,
+    Icon: TuneIcon,
     label: 'Settings',
     route: ROUTES.SETTINGS
   }

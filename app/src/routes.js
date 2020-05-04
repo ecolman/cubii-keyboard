@@ -10,7 +10,7 @@ function Routes() {
     <Switch>
       <Route exact path={ROUTES.BLUETOOTH} component={Bluetooth}></Route>
       <Route exact path={ROUTES.SETTINGS} component={Settings}></Route>
-      <Redirect exact from="/" to={ROUTES.SETTINGS} />
+      <Redirect exact from="/" to={ROUTES.BLUETOOTH} />
     </Switch>  
   )
 }

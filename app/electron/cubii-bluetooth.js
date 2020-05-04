@@ -36,31 +36,33 @@ module.exports = {
     let foundCharacteristics;
 
     ipcMain.on(findPeripheralRequest, (event, serviceUuid) => {
-      try {
-        noble.on('stateChange', function(state) {
-          if (state === 'poweredOn') {
-            noble.startScanning([serviceUuid], false);
-          } else {
-            noble.stopScanning();
-          }
-        });
-  
-        noble.on('discover', function(peripheral) {
+      noble.on('stateChange', function(state) {
+        debug ? console.log('State Change:', state) : null;
+        if (state === 'poweredOn') {
+          debug ? console.log('Start Scanning') : null;
+          noble.startScanning([serviceUuid], false);
+        } else {
+          debug ? console.log('Stop Scanning') : null;
           noble.stopScanning();
-        
-          foundPeripheral = peripheral;
-          foundServiceUuid = serviceUuid;
-  
-          event.sender.send(foundPeripheralResponse, foundPeripheral);
-        });          
-      } catch (error) {
-        
-      }
+        }
+      });
+
+      noble.on('discover', function(peripheral) {
+        debug ? console.log('Discover', peripheral.uuid) : null;
+        noble.stopScanning();
+      
+        foundPeripheral = peripheral;
+        foundServiceUuid = serviceUuid;
+
+        event.sender.send(foundPeripheralResponse, foundPeripheral);
+      });          
     });
 
     ipcMain.on(discoverServicesCharacteristicsRequest, (event) => {
+      debug ? console.log('Discover Services Characteristics') : null;
       if (foundPeripheral && foundServiceUuid) {
         foundPeripheral.connect(function(err) {
+          debug ? console.log('Connecting to', foundPeripheral.uuid) : null;
           foundPeripheral.discoverServices([foundServiceUuid], function(err, services) {
             foundServices = services;
 
