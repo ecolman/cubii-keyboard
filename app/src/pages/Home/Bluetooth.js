@@ -115,16 +115,18 @@ function Bluetooth() {
     return () => {
       window.api.cubiiBluetooth.clearRendererBindings();
 
-      // release key
-      window.api.cubiiBluetooth.send(window.api.cubiiBluetooth.channels.pressKeyRequest, {
-        key: keyToPress, 
-        direction: 'up'
-      });
-
       dispatch(settingsActions.SET_SETTINGS_OPTION({
         id: 'keyIsPressed',
         value: false
       }));
+
+      // release key
+      if (window?.api?.cubiiBluetooth?.send) {
+        window.api.cubiiBluetooth.send(window.api.cubiiBluetooth.channels.pressKeyRequest, {
+          key: keyToPress, 
+          direction: 'up'
+        });
+      }
     }
   }, []);
   
@@ -149,6 +151,7 @@ function Bluetooth() {
 
       if (dir) {
         direction.current = dir;
+
         window.api.cubiiBluetooth.send(window.api.cubiiBluetooth.channels.pressKeyRequest, {
           key: keyToPress, 
           direction: dir
