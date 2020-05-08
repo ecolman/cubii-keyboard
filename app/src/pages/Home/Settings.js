@@ -4,6 +4,7 @@ import {
   Card,
   CardHeader,
   CardContent,
+  Divider,
   Grid,
   Slider,
   Switch,
@@ -54,10 +55,11 @@ function Settings() {
 
     const listener = event => {
       setSettingKey(false);
+      const key = event.key.toLowerCase().replace('arrow', '');
 
       dispatch(settingsActions.SET_SETTINGS_OPTION({
         id: 'keyToPress',
-        value: event.key.toLowerCase()
+        value: key
       }));
 
       window.removeEventListener('keyup', listener, true);
@@ -80,6 +82,7 @@ function Settings() {
               variant: 'h6'
             }}
           />
+          <Divider />
           <CardContent>
             <Typography>
               <b>Speed</b>
@@ -141,6 +144,7 @@ function Settings() {
               variant: 'h6'
             }}
           />
+          <Divider />
           <CardContent>
             {!settingKey && (
               <Button
